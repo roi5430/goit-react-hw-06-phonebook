@@ -1,17 +1,42 @@
-import css from './PhonebookForm.module.css';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import css from './PhonebookForm.module.css';
+import { addContact } from 'redux/contactsSlice';
 
-export const PhonebookForm = ({ onSubmit }) => {
+export const PhonebookForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const contactsSelector = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
+
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(name, number);
+    const checkName = contactsSelector.some(
+      contact => contact.name.toString().toLowerCase() === name.toLowerCase()
+    );
+    if (!checkName) {
+      const currentContact = { id: nanoid(), number, name };
+      dispatch(addContact(currentContact));
+    } else {
+      window.alert(`${name} is already in contacts`);
+    }
     setName('');
     setNumber('');
   };
+
+  // const addContact = (name, number) => {
+  //   const checkName = contactsSelector.some(
+  //     contact => contact.name.toLowerCase() === name.toLowerCase()
+  //   );
+  //   if (!checkName) {
+  //     const currentContact = { id: nanoid(), number, name };
+  //     dispatch(addContact(currentContact));
+  //   } else {
+  //     window.alert(`${name} is already in contacts`);
+  //   }
+  // };
 
   return (
     <div className={css.phonebook}>
@@ -49,8 +74,4 @@ export const PhonebookForm = ({ onSubmit }) => {
       </form>
     </div>
   );
-};
-
-PhonebookForm.propTypes = {
-  onSubmit: PropTypes.func,
 };
