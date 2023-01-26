@@ -14,7 +14,7 @@ export const PhonebookForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const checkName = contactsSelector.some(
-      contact => contact.name.toString().toLowerCase() === name.toLowerCase()
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
     if (!checkName) {
       const currentContact = { id: nanoid(), number, name };
@@ -25,18 +25,6 @@ export const PhonebookForm = () => {
     setName('');
     setNumber('');
   };
-
-  // const addContact = (name, number) => {
-  //   const checkName = contactsSelector.some(
-  //     contact => contact.name.toLowerCase() === name.toLowerCase()
-  //   );
-  //   if (!checkName) {
-  //     const currentContact = { id: nanoid(), number, name };
-  //     dispatch(addContact(currentContact));
-  //   } else {
-  //     window.alert(`${name} is already in contacts`);
-  //   }
-  // };
 
   return (
     <div className={css.phonebook}>
