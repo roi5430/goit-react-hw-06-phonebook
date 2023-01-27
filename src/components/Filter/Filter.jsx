@@ -5,7 +5,6 @@ import { contactsFilter } from 'redux/filtersSlice';
 export const Filter = () => {
   const dispatch = useDispatch();
   const filterSelector = useSelector(state => state.filter);
-  // const searchContact = evt => evt.currentTarget.value;
 
   return (
     <label className={css.filter__label}>

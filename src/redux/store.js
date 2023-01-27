@@ -9,27 +9,12 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-
-// import combineRedusers from './combineRedusers';
-
-// що робить storage?
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-// };
-
-// const persistedReducer = persistReducer(persistConfig, combineRedusers);
-
-// const store = configureStore({
-//   reducer: persistedReducer,
-// });
-
-// const persist = persistStore(store);
+import filtersSlice from './filtersSlice';
 
 const store = configureStore({
   reducer: {
     contacts: persistedReducer,
-    filter: '',
+    filter: filtersSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

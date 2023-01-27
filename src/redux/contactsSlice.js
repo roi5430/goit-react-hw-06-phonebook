@@ -12,7 +12,7 @@ export const contactsSlice = createSlice({
       state.items.push(action.payload);
     },
     deleteContact(state, action) {
-      return state.items.filter(item => item.id !== action.payload);
+      state.items = state.items.filter(item => item.id !== action.payload);
     },
   },
 });
